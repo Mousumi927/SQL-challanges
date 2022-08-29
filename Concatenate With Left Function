@@ -1,0 +1,41 @@
+Generate the following two result sets:
+
+Query an alphabetically ordered list of all names in OCCUPATIONS, immediately followed by the first letter of each profession as a parenthetical (i.e.: enclosed in parentheses). For example: AnActorName(A), ADoctorName(D), AProfessorName(P), and ASingerName(S).
+Query the number of ocurrences of each occupation in OCCUPATIONS. Sort the occurrences in ascending order, and output them in the following format:
+
+There are a total of [occupation_count] [occupation]s. where [occupation_count] is the number of occurrences of an occupation in OCCUPATIONS and [occupation] is the lowercase occupation name. If more than one Occupation has the same [occupation_count], they should be ordered alphabetically.
+
+--------------------------
+|   Column   |  Type     |
+|    Name    |  string   |
+| Occupation |  string   |
+--------------------------
+
+---------------------------
+|   Name    |  Occupation |
+|  Samantha |  Actor      |
+|  Julia    |  Actor      |
+|  Maria    |  Singer     |
+|  Meera    |  Professor  |
+|  Ashley   |  Professor  |
+|  Ketty    |  Professor  |
+|  Christeen|  Actor      |
+|  Jane     |  Doctor     |
+|  Jenny    |  Doctor     |
+|  Priya    | Singer      |
+--------------------------
+
+https://www.hackerrank.com/challenges/the-pads/problem?isFullScreen=true
+
+Solution:
+
+first Q:
+SELECT CONCAT(NAME,'(',LEFT(OCCUPATION, 1),')') 
+FROM OCCUPATIONS 
+ORDER BY NAME;
+
+Second Q:
+SELECT CONCAT('There are a total of ', COUNT(Occupation), ' ', LOWER(OCCUPATION), 's.') 
+FROM OCCUPATIONS 
+GROUP BY OCCUPATION 
+ORDER BY COUNT(OCCUPATION);
